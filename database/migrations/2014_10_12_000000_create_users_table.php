@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,13 +15,49 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+            $table->string("userName", 50);
+            $table->string("email", 50);
+            $table->string("password", 255);
+            $table->enum("role",["admin", "customer"]);
+            $table->string("reset_token", 64);
+            $table->datetime("token_expiry");
+            $table->string("reset_token_hash", 64);
+            $table->datetime("reset_token_expires_at");
+
+            
         });
+        DB::table('users')->insert([
+            [
+                "userName" => "abrea",
+                "email" => "occ.abrea@gmail.com",
+                "password" => Hash::make("imba"),
+                "role" => "admin",
+                "reset_token" => '',
+                "token_expiry" => now(),
+                "reset_token_hash" => '',
+                "reset_token_expires_at" => now()
+            ],
+            [
+                "userName" => "padere",
+                "email" => "occ.padere@gmail.com",
+                "password" => Hash::make("imba1"),
+                "role" => "admin",
+                "reset_token" => '',
+                "token_expiry" => now(),
+                "reset_token_hash" => '',
+                "reset_token_expires_at" => now()
+            ],
+            [
+                "userName" => "antiquina",
+                "email" => "occ.antiquina@gmail.com",
+                "password" => Hash::make("imba2"),
+                "role" => "admin",
+                "reset_token" => '',
+                "token_expiry" => now(),
+                "reset_token_hash" => '',
+                "reset_token_expires_at" => now()
+            ]
+            ]);
     }
 
     /**

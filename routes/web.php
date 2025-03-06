@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin_Controller;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\User_profile_Controller;
+use App\Http\Controllers\Users_Controller;
+use App\Models\Admin;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +21,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/Transaction',[TransactionController::class,'getTransData']);
+
+Route::get('/Users',[Users_Controller::class,'getUsersData']);
+
+Route::get('/Userprofile',[User_profile_Controller::class,'getUserProfileData']);
+
+Route::get('/Admin',[Admin_Controller::class,'getAdminData']);
+
